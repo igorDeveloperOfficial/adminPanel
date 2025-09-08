@@ -2,12 +2,12 @@
 
 namespace Core\Middleware;
 
-class Auth
+class Guest
 {
     public function handle()
     {
-        if (!$_SESSION['user'] ?? false) {
-            redirect('/login');
+        if ($_SESSION['user'] ?? false) {
+            redirect('/');
 
         }
     }

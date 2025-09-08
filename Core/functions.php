@@ -11,7 +11,7 @@ function view($path,$data = []){
 
 function redirect($path)
 {
-    header("Location: /".$path);
+    header("Location: {$path}");
 }
 function dd($value = "Hello"){
     echo  "<pre>";

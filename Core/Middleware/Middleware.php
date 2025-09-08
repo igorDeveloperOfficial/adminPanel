@@ -5,18 +5,23 @@ namespace Core\Middleware;
 class Middleware
 {
     const MAP = [
-        'auth'=>Auth::class
+        'auth'=>Auth::class,
+        'guest'=>Guest::class
  ];
 
-    function resolve($key){
+    static function resolve($key){
         if(!$key){
-            return;
+            return ;
+        }
+        $middleware = self::MAP[$key] ?? false;
+
+
+        if(!$middleware){
+            throw new \Exception("Middleware not found in $key");
         }
 
-        if(!array_key_exists($key, self::MAP)){
-            throw new \Exception("Missing Auth Middleware");
-        }
+        (new $middleware)->handle();
 
-        self::MAP[$key]->resolve();
+
     }
 }
